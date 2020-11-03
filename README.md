@@ -159,7 +159,133 @@ seq2 = [seq 'ATTAGAAACC']
 %    'GCTAGAATCCATTAGAAACC'
 ```
 
-**Függvények és függvényhívások**
+**Függvényhívások**
 ```Matlab
+% maximum kiválasztás
+max() %argumentumként sorvektort beadva egy értéket akpunk vissza maximumként
+      %argumentumként mátrixot beadva minden egyes oszlop maximumát kapjuk meg sorvektorként
+      
+% B =  0     2     4     6     8    10    12    14
+max(B)
+%   14
 
+%A =
+%    16     2     3    13
+%     5    11    10     8
+%     9     7     6    12
+%     4    14    15     1
+
+max(A)
+%    16    14    15    13
+
+%két vektor maximuma/minimuma
+BB = rand(1,8)
+% BB =    0.2760    0.6797    0.6551    0.1626    0.1190    0.4984    0.9597    0.3404
+max(B,BB)
+%     0.2760    2.0000    4.0000    6.0000    8.0000   10.0000   12.0000   14.0000
+min(B,BB)
+%         0    0.6797    0.6551    0.1626    0.1190    0.4984    0.9597    0.3404
+
+% egyszerre több visszatérési érték változóba mentése
+[max, location] = max(B)
+%maxA =
+%    14
+%
+%location =
+%     8
 ```
+
+**Ábrázolások, grafikonok**
+**Vonal görbék**
+```MATLAB
+% 0-tól 2PI-ig a szinusz függvény:
+x = 0:pi/100:2*pi;
+y = sin(x);
+plot(x,y)
+
+% tengelyek feliratának hozzáadása
+xlabel('x')
+ylabel('sin(x)')
+title('Plot of the Sine Function')
+
+% színes szaggatott vonallal rajzolás, pl piros szaggatottal
+plot(x,y,'r--')
+
+% Két grafikon egymásra tétele
+x = 0:pi/100:2*pi;
+y = sin(x);
+plot(x,y)
+
+hold on
+
+y2 = cos(x);
+plot(x,y2,':')
+legend('sin','cos')
+
+hold off
+
+% 3D grafikon
+[X,Y] = meshgrid(-2:.2:2);    % koordinátarendszer, méretek, -tól - -ig ábrázolás                            
+Z = X .* exp(-X.^2 - Y.^2);   % 3. függvény
+
+surf(X,Y,Z)                   % kirajzolás
+
+
+% több grafikon egyyben
+% alább 2 sorban
+%       2 oszlopban
+%       rajzolunk ki rafikonokat, a harmadik input azt adja meg, hogy melyik aktív
+
+t = 0:pi/10:2*pi;
+[X,Y,Z] = cylinder(4*cos(t));
+subplot(2,2,1); mesh(X); title('X');
+subplot(2,2,2); mesh(Y); title('Y');
+subplot(2,2,3); mesh(Z); title('Z');
+subplot(2,2,4); mesh(X,Y,Z); title('X,Y,Z');
+```
+
+**Programozhatóság és scriptelhetőség**
+scriptek készítéséhez csinálunk egy script fájlt:
+```Matlab
+edit mysphere       %edit fájlnév
+```
+Ekkor kreálódik egy `mysphere.m.` fájl.
+```Matlab
+% Create and plot a sphere with radius r.
+[x,y,z] = sphere;       % Create a unit sphere.
+r = 2;
+surf(x*r,y*r,z*r)       % Adjust each dimension and plot.
+axis equal              % Use the same scale for each axis. 
+ 
+% Find the surface area and volume.
+A = 4*pi*r^2;
+V = (4/3)*pi*r^3;
+```
+Futtatásához írjuk be a script nevét a parancssorba: `mysphere`
+
+A készített grafikon átkonvertálható `MATLAB live code file (*.mlx)`-á ami egy `live script`. Ehhez a `save as` menüponton keresztül jutunk el. A készített függvényekhez dokumentációkat írhatunk a `doc` parancsal, pl a `mean` függvéyn dokumentációja ami a `mean(`begépelése után jelenik meg í]y adható meg:
+```Matlab
+doc mean
+```
+
+**Ciklusok, feltételek**
+```Matlab
+N = 100;
+f(1) = 1;
+f(2) = 1;
+
+for n = 3:N
+    f(n) = f(n-1) + f(n-2);
+end
+f(1:10)
+
+num = randi(100)
+if num < 34
+   sz = 'low'
+elseif num < 67
+   sz = 'medium'
+else
+   sz = 'high'
+end
+```
+
