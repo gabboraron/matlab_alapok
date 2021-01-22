@@ -1,6 +1,6 @@
 # Alap matlab függvények
 
-Egy kis irodalom: http://www.mit.bme.hu/oktatas/targyak/vimia305/matlab
+Egy kis irodalom: http://www.mit.bme.hu/oktatas/targyak/vimia305/matlab illetve sok jó leírás itt: https://youproof.hu/blog/
 
 **Változók, vektorok, mátrixok, komplex számok**
 ```MATLAB
